@@ -44,14 +44,14 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
-    update, name, href = check_update()
-    if (update):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=name))
+    if (event.message.text == "進度"):
+        update, name, href = check_update()
+        if (update):
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=name))
+        else:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="No updated"))
     else:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="No updated"))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text))
 
 
 if __name__ == "__main__":
