@@ -46,8 +46,9 @@ def callback():
 def handle_message(event):
     if (event.message.text == "進度"):
         update, name, href = check_update()
+        mess = name+"\n"+href
         if (update):
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=name))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=mess))
         else:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text="No updated"))
     else:

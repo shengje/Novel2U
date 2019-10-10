@@ -21,7 +21,7 @@ def check_update(url="https://www.uukanshu.com", novel="/b/439/"):
         update = True
         #print("New chapter ", new.text, "is updated!")
         #print("URL:", url+new.get('href'))
-    return update, new.text, new.get('href')
+    return update, new.text, url+new.get('href')
 
 if __name__ == "__main__":
     update, name, href = check_update()
