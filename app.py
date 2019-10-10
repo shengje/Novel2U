@@ -9,11 +9,12 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
+from check import check_update
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('X2ga8blI+bQgTq52xUBEpvTQbOzJXIr8nLA05yXX6ok4hHB4vDe8Y85ZQBkvfPKOv+WkfaUP7aq5EJbiwAqO9J6+rK850T67BhF/AQCQ+UBvfaKqxTW9j9FtX3QZXX5qyWNV239YskeO/CE7+0YPaQdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('0c360ea2ab1a5b3dcce105d393d74de9')
+line_bot_api = LineBotApi('0c360ea2ab1a5b3dcce105d393d74de9')
+handler = WebhookHandler('X2ga8blI+bQgTq52xUBEpvTQbOzJXIr8nLA05yXX6ok4hHB4vDe8Y85ZQBkvfPKOv+WkfaUP7aq5EJbiwAqO9J6+rK850T67BhF/AQCQ+UBvfaKqxTW9j9FtX3QZXX5qyWNV239YskeO/CE7+0YPaQdB04t89/1O/w1cDnyilFU=')
 
 
 @app.route("/")
@@ -46,8 +47,14 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
+    update, name, href = check_update()
+    if (update):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=name))
+    else:
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="No updated"))
 
 
 if __name__ == "__main__":
     app.run()
+    
     
