@@ -13,8 +13,8 @@ from check import check_update
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('X2ga8blI+bQgTq52xUBEpvTQbOzJXIr8nLA05yXX6ok4hHB4vDe8Y85ZQBkvfPKOv+WkfaUP7aq5EJbiwAqO9J6+rK850T67BhF/AQCQ+UBvfaKqxTW9j9FtX3QZXX5qyWNV239YskeO/CE7+0YPaQdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('0c360ea2ab1a5b3dcce105d393d74de9')
+line_bot_api = LineBotApi(LINE_BOT_KEY)
+handler = WebhookHandler(HANDLER)
 
 
 @app.route("/")
